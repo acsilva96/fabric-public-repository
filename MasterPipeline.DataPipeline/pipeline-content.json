@@ -2,33 +2,16 @@
   "properties": {
     "activities": [
       {
+        "name": "Wait1",
         "type": "Wait",
+        "dependsOn": [],
         "typeProperties": {
           "waitTimeInSeconds": 1
-        },
-        "name": "Wait1",
-        "dependsOn": []
+        }
       },
       {
-        "type": "InvokePipeline",
-        "typeProperties": {
-          "parameters": {},
-          "waitOnCompletion": true,
-          "workspaceId": "2a571ef1-6ad8-4a7e-a567-561d294ef236",
-          "pipelineId": "0d33fc08-b76a-46a5-abae-f7786c788b49",
-          "operationType": "InvokeFabricPipeline"
-        },
-        "externalReferences": {
-          "connection": "9ec59f9b-d383-4927-83ca-95534c4a9703"
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Invoke pipeline1",
+        "name": "Lookup1",
+        "type": "Lookup",
         "dependsOn": [
           {
             "activity": "Wait1",
@@ -36,7 +19,45 @@
               "Succeeded"
             ]
           }
-        ]
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            }
+          },
+          "datasetSettings": {
+            "annotations": [],
+            "type": "DelimitedText",
+            "typeProperties": {
+              "location": {
+                "type": "AzureBlobStorageLocation",
+                "container": "input"
+              },
+              "columnDelimiter": ",",
+              "escapeChar": "\\",
+              "firstRowAsHeader": true,
+              "quoteChar": "\""
+            },
+            "schema": [],
+            "externalReferences": {
+              "connection": "908ad971-c34f-432d-a537-56cf9aa03eeb"
+            }
+          }
+        }
       }
     ]
   }
