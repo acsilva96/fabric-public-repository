@@ -1,0 +1,73 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy data1",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "sample-dwh",
+                "properties": {
+                  "annotations": [],
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "endpoint": "xpjps2272mke5ee5mgiwuq63dy-6epfokwynj7evjlhkyosstxsgy.datawarehouse.fabric.microsoft.com",
+                    "artifactId": "9fa57a21-6897-4cd1-badd-fe349635c68a",
+                    "workspaceId": "2a571ef1-6ad8-4a7e-a567-561d294ef236"
+                  }
+                }
+              },
+              "type": "DataWarehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "Trip"
+              }
+            }
+          },
+          "sink": {
+            "type": "SqlServerSink",
+            "writeBehavior": "insert",
+            "sqlWriterUseTableLock": false,
+            "datasetSettings": {
+              "annotations": [],
+              "type": "SqlServerTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "",
+                "table": "Trip",
+                "database": "acsilva-db"
+              },
+              "externalReferences": {
+                "connection": "330cdcc5-0d5f-46d5-8727-471283810f8a"
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      }
+    ]
+  }
+}

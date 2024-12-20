@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "PopulateSQL"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "815cf76c-9d2f-47fc-8d64-d7e6e29df068"
+  }
+}
